@@ -1,0 +1,7 @@
+# serverless
+.dynamodb
+dev-certs
+
+# nodejs
+node_modules
+test-results
