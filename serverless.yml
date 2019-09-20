@@ -1,0 +1,140 @@
+service: lti-advantage-tool
+
+plugins:
+ - serverless-dynamodb-local
+ - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+functions:
+  authenticate:
+    handler: src/index.authenticate
+    events:
+      - http:
+          path: authenticate
+          method: post
+    environment:
+      BASE_URI: ${env:BASE_URI}
+  configure:
+    handler: src/index.configure
+    events:
+      - http:
+          path: configure
+          method: post
+    environment:
+      BASE_URI: ${env:BASE_URI}
+  connect:
+    handler: src/index.connect
+    events:
+      - http:
+          path: connect
+          method: post
+    environment:
+      BASE_URI: ${env:BASE_URI}
+  connect_get:
+    handler: src/index.connect
+    events:
+      - http:
+          path: connect
+          method: get
+    environment:
+      BASE_URI: ${env:BASE_URI}
+  links_simple:
+    handler: src/index.links_simple
+    events:
+      - http:
+          path: links/simple
+          method: get
+  links_ags:
+    handler: src/index.links_ags
+    events:
+      - http:
+          path: links/ags
+          method: get
+  links_ags_create_form:
+    handler: src/index.links_ags_create_form
+    events:
+      - http:
+          path: links/ags_create_form
+          method: get
+  links_ags_create:
+    handler: src/index.links_ags_create
+    events:
+      - http:
+          path: links/ags_create
+          method: post
+  links_ags_scores:
+    handler: src/index.links_ags_scores
+    events:
+      - http:
+          path: links/ags_scores
+          method: get
+  links_ags_scores_post:
+    handler: src/index.links_ags_scores_post
+    events:
+      - http:
+          path: links/ags_scores_post
+          method: post
+  links_nrps:
+    handler: src/index.links_nrps
+    events:
+      - http:
+          path: links/nrps
+          method: get
+  jwks:
+    handler: src/index.wellknown
+    events:
+      - http:
+          path: .well-known/jwks.json
+          method: get
+
+resources:
+  Resources:
+    clientsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: LtiClients
+        AttributeDefinitions:
+          - AttributeName: issuer
+            AttributeType: S
+        KeySchema:
+          - AttributeName: issuer
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+    sessionTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: LtiSessions
+        AttributeDefinitions:
+          - AttributeName: sessionId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: sessionId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TimeToLiveSpecification:
+          AttributeName: expires
+          Enabled: true
+    keysTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: LtiKeys
+        AttributeDefinitions:
+          - AttributeName: kid
+            AttributeType: S
+        KeySchema:
+          - AttributeName: kid
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      migrate: true
+  serverless-offline:
+    host: 0.0.0.0
+    httpsProtocol: dev-certs

@@ -1,0 +1,11 @@
+{
+	"name": "Serverless",
+	"dockerFile": "Dockerfile",
+	"appPort": [
+		3000,
+		8000
+	],
+	"extensions": [
+		"dbaeumer.vscode-eslint"
+	]
+}
