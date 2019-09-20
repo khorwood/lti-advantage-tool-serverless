@@ -15,6 +15,8 @@ npm ci
 sls dynamodb install
 ```
 
+Add the public key to your OS trusted key store
+
 To start DynamoDB local:
 
 `sls dynamodb start`
@@ -44,6 +46,5 @@ Create a client configuration by posting to `/configure`
 | Link | Description |
 | -- | -- |
 | `/links/simple` | A link to test launches |
-| `/links/lineitem` | A link which allows creation of line items |
-| `/links/lineitemscore` | A link which allows creation of line item scores |
-| `/links/nrpslink` | A link which fetches the roster |
+| `/links/ags` | A link to the AGS line items for the launched context |
+| `/links/nrps` | A link to the NRPS data for the launched context |
