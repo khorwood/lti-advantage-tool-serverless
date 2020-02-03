@@ -14,5 +14,6 @@ module.exports = {
     links_ags_create: require('./handlers/links/ags').create,
     links_ags_scores: require('./handlers/links/ags').scores,
     links_ags_scores_post: require('./handlers/links/ags').scores_post,
+    links_ags_get_token: require('./handlers/links/ags').get_ags_token,
     links_nrps: require('./handlers/links/nrps').handler
 };

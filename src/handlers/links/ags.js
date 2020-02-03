@@ -383,5 +383,22 @@ module.exports = {
             }
             return e;
         }
+    },
+    get_ags_token: async event => {
+        try {
+            const client = await Client.fetchAsync(JSON.parse(event.body).issuer);
+            debug(client);
+            const access_token = await client.getTokenAsync();
+            return {
+                statusCode: 200,
+                headers: {
+                    'Content-Type': 'text/html'
+                },
+                body: access_token
+            };
+        } catch (e) {
+            debug(e);
+            return e;
+        }
     }
 };

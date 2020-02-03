@@ -77,6 +77,12 @@ functions:
       - http:
           path: links/ags_scores_post
           method: post
+  links_ags_get_token:
+    handler: src/index.links_ags_get_token
+    events:
+      - http:
+          path: links/get_ags_token
+          method: post
   links_nrps:
     handler: src/index.links_nrps
     events:
