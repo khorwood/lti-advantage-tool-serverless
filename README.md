@@ -71,3 +71,13 @@ Create a client (platform) configuration by posting to `/configure`
 | `LtiClients` | Contains client (platform) registration data |
 | `LtiSessions` | Contains user launch session data |
 | `LtiKeys` | Contains the private keys used by the tool |
+
+## To run on local
+
+1. Download the ngrok on https://dashboard.ngrok.com/get-started and connect to your account.
+2. Run ngrok.exe, start ngrok using command `ngrok http https://localhost:3000`. You will get a ngrok https Url like this `https://1d469e88.ngrok.io`.
+3. Create the [TLS Keys](#create-tls-keys) and install the [serverless](#install-serverless-for-development) follow the above description.
+4. Start the Dynamo using the command  `BASE_URI={https URL from ngrok} sls dynamodb start`. ex: `BASE_URI=https://1d469e88.ngrok.io sls dynamodb start`.
+5. Start API Gateway using the command `BASE_URI={https URL from ngrok} sls offline`. ex: `BASE_URI=https://1d469e88.ngrok.io sls offline`.
+6. Register and deploy the tool using ngrok https URL and the [endpoints](#Endpoints) above.
+7. Create a client configuration by posting to `{https URL from ngrok}/configure`.
