@@ -56,6 +56,14 @@ Create a client (platform) configuration by posting to `/configure`
 }
 ```
 
+### Lineitem token API 
+After create a client (platform) configuration, post to `/links/get_ags_token` to get the token.
+
+```json
+{
+    "issuer": "<platform issuer>"
+}
+```
 ## Links
 
 | Link | Description |
