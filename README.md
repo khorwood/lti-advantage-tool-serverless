@@ -1,5 +1,7 @@
 # lti-advantage-tool
 
+THIS PROJECT HAS BEEN ABANDONED DUE TO LACK OF TIME
+
 [![CircleCI](https://circleci.com/gh/khorwood/lti-advantage-tool-serverless.svg?style=svg)](https://circleci.com/gh/khorwood/lti-advantage-tool-serverless)
 
 A test harness which implements an IMS LTI Advantage tool in AWS
